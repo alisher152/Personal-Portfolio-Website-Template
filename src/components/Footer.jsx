@@ -105,8 +105,8 @@ const Footer = () => {
           </a>
         </div>
       </div>
-      <div className="bg-gray-900">
-        <p className="mt-8 text-gray-600 dark:text-gray-300">
+      <div className="bg-white dark:bg-gray-900">
+        <p className="mt-8 text-gray-800 dark:text-gray-300">
           2023 | Designed and coded with ❤️ by Sagar Shah
         </p>
       </div>

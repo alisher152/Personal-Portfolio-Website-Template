@@ -288,7 +288,7 @@ const Description = () => {
         </div>
 
         {/* Testimonials Section */}
-        <div className="px-4 pb-12 mx-auto bg-gray-900">
+        <div className="px-4 pb-12 mx-auto bg-white dark:bg-gray-900">
           <h2 className="inline-block px-4 py-1 mb-6 text-lg font-medium text-black bg-gray-200 rounded-2xl dark:bg-gray-700 dark:text-white lg:ml-194 lg:mt-10">
             Testimonials
           </h2>

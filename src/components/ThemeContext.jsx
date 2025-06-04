@@ -31,6 +31,12 @@ export const ThemeProvider = ({ children }) => {
   }, [darkMode]);
 
   const toggleDarkMode = () => {
+    if (darkMode) {
+      document.querySelector("html").classList = [];
+    } else {
+      document.querySelector("html").classList = ["dark"];
+    }
+
     setDarkMode((prevMode) => {
       console.log("Toggling theme, new mode:", !prevMode);
       return !prevMode;

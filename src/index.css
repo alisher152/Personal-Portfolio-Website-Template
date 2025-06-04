@@ -3,3 +3,5 @@
 body {
   overflow-x: hidden;
 }
+
+@custom-variant dark (&:where(.dark, .dark *));
