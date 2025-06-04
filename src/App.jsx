@@ -1,19 +1,22 @@
-import Navbar from "./components/Navbar.jsx";
-import Hero from "./components/Hero.jsx";
-import Header from "./components/Header.jsx";
-import Description from "./components/Description.jsx";
-import Footer from "./components/Footer.jsx";
+import { ThemeProvider } from "./components/ThemeContext";
+import Navbar from "./components/Navbar";
+import Hero from "./components/Hero";
+import Header from "./components/Header";
+import Description from "./components/Description";
+import Footer from "./components/Footer";
 
-const App = () => {
+function App() {
   return (
-    <div>
-      <Navbar />
-      <Hero />
-      <Header />
-      <Description />
-      <Footer />
-    </div>
+    <ThemeProvider>
+      <div className="min-h-screen bg-test-light dark:bg-black text-black dark:text-white">
+        <Navbar />
+        <Hero />
+        <Header />
+        <Description />
+        <Footer />
+      </div>
+    </ThemeProvider>
   );
-};
+}
 
 export default App;

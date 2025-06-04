@@ -1,123 +1,122 @@
-import React, { useState, useEffect } from "react";
-import { Sun, Moon } from "react-feather";
-import { FaBars } from "react-icons/fa"; // Hamburger icon
+import { useState } from "react";
+import { FaBars, FaTimes, FaSun, FaMoon } from "react-icons/fa";
+import { useTheme } from "./ThemeContext";
 
 const Navbar = () => {
-  const [darkMode, setDarkMode] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const { darkMode, toggleDarkMode } = useTheme();
 
-  // Apply theme when state changes
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-  }, [darkMode]);
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
 
   return (
-    <nav className="flex items-center justify-between p-4 bg-white shadow-sm transition-colors duration-300 relative">
-      {/* Logo (left) */}
-      <div className="font-mono text-2xl font-bold text-black ml-4">
-        <div className="w-12 h-12 text-black flex items-center justify-center rounded">
+    <nav className="bg-white shadow-md dark:bg-black">
+      <div className="flex items-center justify-between max-w-6xl px-4 py-4 mx-auto">
+        {/* Logo */}
+        <div className="text-2xl font-bold text-gray-800 dark:text-white">
           &lt;SS/&gt;
         </div>
-      </div>
 
-      {/* Hamburger Menu for mobile */}
-      <div className="md:hidden">
-        <button
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="p-2 text-gray-700 hover:text-gray-900 focus:outline-none"
-          aria-label="Toggle menu"
-        >
-          <FaBars size={24} />
-        </button>
-      </div>
-
-      {/* Navigation links and controls for desktop */}
-      <div className="hidden md:flex items-center space-x-6">
-        <div className="flex space-x-6">
+        {/* Desktop Menu */}
+        <div className="items-center hidden space-x-8 md:flex">
           <a
             href="#about"
-            className="text-black hover:text-gray-300 transition"
-          >
-            About
-          </a>
-          <a href="#work" className="text-black hover:text-gray-300 transition">
-            Work
-          </a>
-          <a
-            href="#testimonials"
-            className="text-black hover:text-gray-300 transition"
-          >
-            Testimonials
-          </a>
-          <a
-            href="#contact"
-            className="text-black hover:text-gray-300 transition"
-          >
-            Contact
-          </a>
-        </div>
-
-        {/* Theme toggle */}
-        <button
-          onClick={() => setDarkMode(!darkMode)}
-          className="p-2 rounded-full text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition"
-          aria-label="Toggle dark mode"
-        >
-          {darkMode ? <Moon size={20} /> : <Sun size={20} />}
-        </button>
-
-        {/* Download CV button */}
-        <button className="px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 transition rounded">
-          Download CV
-        </button>
-      </div>
-
-      {/* Mobile Menu Overlay */}
-      {isMenuOpen && (
-        <div className="fixed inset-0 bg-white z-50 flex flex-col items-center justify-center space-y-6 md:hidden">
-          <button
-            onClick={() => setIsMenuOpen(false)}
-            className="absolute top-4 right-4 p-2 text-gray-700 hover:text-gray-900"
-            aria-label="Close menu"
-          >
-            <FaBars size={24} />
-          </button>
-          <a
-            href="#about"
-            className="text-black text-lg hover:text-gray-300 transition"
-            onClick={() => setIsMenuOpen(false)}
+            className="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white"
           >
             About
           </a>
           <a
             href="#work"
-            className="text-black text-lg hover:text-gray-300 transition"
-            onClick={() => setIsMenuOpen(false)}
+            className="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white"
           >
             Work
           </a>
           <a
             href="#testimonials"
-            className="text-black text-lg hover:text-gray-300 transition"
-            onClick={() => setIsMenuOpen(false)}
+            className="block py-2 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white"
           >
             Testimonials
           </a>
           <a
             href="#contact"
-            className="text-black text-lg hover:text-gray-300 transition"
-            onClick={() => setIsMenuOpen(false)}
+            className="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white"
           >
             Contact
           </a>
+          {/* Theme Toggle Button */}
           <button
-            className="px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 transition rounded"
-            onClick={() => setIsMenuOpen(false)}
+            onClick={toggleDarkMode}
+            className="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white focus:outline-none"
+            aria-label={
+              darkMode ? "Switch to light mode" : "Switch to dark mode"
+            }
           >
+            {darkMode ? <FaSun size={20} /> : <FaMoon size={20} />}
+          </button>
+          <button className="dark:bg-white rounded-2xl dark:text-gray-900 hover:text-gray-800 dark:hover:text-white focus:outline-none">
+            Download CV
+          </button>
+        </div>
+
+        {/* Mobile Menu Button */}
+        <div className="md:hidden">
+          <button
+            onClick={toggleMenu}
+            className="text-gray-600 dark:text-gray-300 focus:outline-none"
+            aria-label={isOpen ? "Close menu" : "Open menu"}
+          >
+            {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Menu */}
+      {isOpen && (
+        <div className="px-4 py-2 bg-white md:hidden dark:bg-black">
+          <a
+            href="#about"
+            className="block py-2 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white"
+          >
+            About
+          </a>
+          <a
+            href="#work"
+            className="block py-2 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white"
+          >
+            Work
+          </a>
+          <a
+            href="#testimonials"
+            className="block py-2 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white"
+          >
+            Testimonials
+          </a>
+          <a
+            href="#contact"
+            className="block py-2 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white"
+          >
+            Contact
+          </a>
+          {/* Theme Toggle Button for Mobile */}
+          <button
+            onClick={toggleDarkMode}
+            className="block py-2 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white focus:outline-none"
+            aria-label={
+              darkMode ? "Switch to light mode" : "Switch to dark mode"
+            }
+          >
+            {darkMode ? (
+              <span className="flex items-center gap-2">
+                <FaSun size={20} /> Light Mode
+              </span>
+            ) : (
+              <span className="flex items-center gap-2">
+                <FaMoon size={20} /> Dark Mode
+              </span>
+            )}
+          </button>
+          <button className="mt-2 text-gray-600 rounded-3xl dark:bg-white dark:text-gray-900 hover:text-gray-800 dark:hover:text-white focus:outline-none">
             Download CV
           </button>
         </div>
